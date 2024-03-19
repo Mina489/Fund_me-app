@@ -106,5 +106,9 @@ async function withdraw(){
 async function view(){
   await getAccess()
   const id=document.getElementById('listing-id-view').value
-  const result=await auctionContract.getlisting
+  const result=await auctionContract.getlisting(id).catch((error) => {
+    if(error.data) alert(error.data.message)
+    else alert(error)
+  })
+  if(!result) return
 }
